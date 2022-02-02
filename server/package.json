@@ -1,0 +1,20 @@
+{
+  "name": "alkemy-challenge-server",
+  "version": "1.0.0",
+  "description": "server node alkemy",
+  "scripts": {
+    "dev": "nodemon app/server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^14.3.0",
+    "express": "~4.16.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.3.0"
+  }
+}
