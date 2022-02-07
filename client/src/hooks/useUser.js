@@ -1,7 +1,7 @@
 import {useCallback, useContext} from 'react'
 import Context from '../context/Usercontext'
 import loginService from '../services/login'
-
+import registerService from '../services/register'
 
 export default function useUser () {
   const { jwt, setJWT} = useContext(Context)
@@ -12,12 +12,12 @@ export default function useUser () {
   const login = useCallback(({email, password}) => {
    console.log({email, password})
     loginService({email, password})
-      .then(token => {
-        window.sessionStorage.setItem('jwt', token.token)
+      .then(data => {
+        window.sessionStorage.setItem('jwt',data.token)
         
-        setJWT(token);
+        setJWT(data);
       
-        return token
+        return data
         
       })
       .catch(err => {
@@ -26,7 +26,11 @@ export default function useUser () {
       })
   }, [setJWT])
 
-  
+  const formRegister=useCallback(({email,password,name})=>{
+    console.log({email, password,name})
+    registerService({email,password,name})
+    
+  })
 
   const logout = useCallback(() => {
    
@@ -40,6 +44,6 @@ export default function useUser () {
     jwt ,  
     login,
     logout,
-   
+    formRegister,
     }
 } 

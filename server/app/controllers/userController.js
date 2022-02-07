@@ -20,21 +20,21 @@ module.exports = {
        {
         name: req.body.name,
         email: req.body.email,
-        password: password,
-        saldo: req.body.saldo
+        password: password,        
        }
     ).then(user => {
         // Creamos el token
-        let token = jwt.sign({ user: user }, authConfig.secret, {
+        let token = createTokens({ user: user }, authConfig.secret, {
             expiresIn: authConfig.expires
         });
-
-        res.json({
+        console.log(token)
+        user({
             user: user,
             token: token
         });
 
-    }).catch(err => {
+    }).catch(err => {      
+      console.log(err)
         res.status(500).json(err);
     });
   

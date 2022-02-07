@@ -39,10 +39,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    saldo: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
   }
   const config = {
     tableName: 'users',
