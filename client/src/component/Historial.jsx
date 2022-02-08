@@ -13,6 +13,9 @@ const Historial = () => {
              <h1 className='text-4xl font-bold mb-10'>
                 Historial
             </h1>
+            {jwt
+            ? <h1>No tienes operaciones</h1>
+            :
             <table className='mt-10 shadow-sm'>
                     <thead className="bg-gray-50">
                         <tr>
@@ -56,7 +59,9 @@ const Historial = () => {
                             </td>
                         </tr>
                     </tbody>
-             </table>
+             </table>   
+        }
+            
 
         </div>
     )

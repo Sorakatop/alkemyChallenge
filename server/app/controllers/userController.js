@@ -10,33 +10,23 @@ module.exports = {
   test: (req, res) => {
     Users.findAll().then(a => { res.send(a) })
   }, 
-  register:  (req, res) => {
+  register: async (req, res) => {
     console.log(req.body);   
     //crypt pw 
     let password = bcrypt.hashSync(req.body.password, +authConfig.rounds);
 
     // Crear un usuario
-    Users.create(
+   try {const user =await Users.create(
        {
         name: req.body.name,
         email: req.body.email,
         password: password,        
-       }
-    ).then(user => {
-        // Creamos el token
-        let token = createTokens({ user: user }, authConfig.secret, {
-            expiresIn: authConfig.expires
-        });
-        console.log(token)
-        user({
-            user: user,
-            token: token
-        });
-
-    }).catch(err => {      
-      console.log(err)
-        res.status(500).json(err);
-    });
+       }       
+    )
+    res.json({user,createTokens})
+  } catch (err) {
+    console.log(err);
+  }
   
   },
   login: async (req, res) => {
