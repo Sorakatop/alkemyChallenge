@@ -1,7 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router , Route ,Switch,Redirect,Link} from 'react-router-dom'
-//custom hooks
-import useUser from '../hooks/useUser'
+import {Route ,Switch,Link} from 'react-router-dom'
 //styles
 import {li,icon} from '../taildwind/styles'
 //icons
@@ -10,15 +8,15 @@ import operation from '../icons/shopping-bag.svg'
 import historial from '../icons/archive.svg'
 import user from '../icons/user-circle.svg'
 import ajustes from '../icons/cog.svg'
-import logout from '../icons/logout.svg'
 //components
-import Info from '../component/Info';
-import Historial from './Historial'
+import Info from '../component/dashboard/Info';
+import Historial from './dashboard/Historial'
+import Operations from '../component/dashboard/Operation'
 
 const Dashboard = () => {
  
     return (  
-        <div className="container w-full flex">
+        <div className="container w-full h-screen flex">
         <div className='p-6 border-r w-1/4 border-gray-200'>
           
           <h6 className='mb-8 text-center font-bold text-xl'>Acciones rapidas</h6>
@@ -42,6 +40,7 @@ const Dashboard = () => {
           <Switch>
           <Route exact path="/" component={Info} />
           <Route exact path="/historial" component={Historial} />
+          <Route exact path="/operaciones" component={Operations} />
           </Switch> 
           </div>
 

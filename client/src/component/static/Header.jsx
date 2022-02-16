@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'wouter'
 //styles
-import {title} from '../taildwind/styles'
+import {title} from '../../taildwind/styles'
 //hooks
-import useUser from '../hooks/useUser'
+import useUser from '../../hooks/useUser'
 
 
 const Header = () => {

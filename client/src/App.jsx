@@ -1,6 +1,6 @@
 import React from 'react'
 //components
-import Header from './component/Header'
+import Header from './component/static/Header'
 //context
 import {UserContextProvider} from './context/Usercontext'
 import AppRouter from './router/AppRouter'

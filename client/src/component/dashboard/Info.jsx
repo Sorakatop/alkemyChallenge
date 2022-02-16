@@ -1,6 +1,6 @@
 import React from 'react'
-import {button} from '../taildwind/styles'
-import useUser from '../hooks/useUser'
+import {button} from '../../taildwind/styles'
+import useUser from '../../hooks/useUser'
 const Info = () => { 
 const {jwt} = useUser()
     return ( 

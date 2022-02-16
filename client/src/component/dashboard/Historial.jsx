@@ -1,6 +1,6 @@
 import React from 'react'
-import {headTable,bodyTable} from '../taildwind/styles'
-import useUser from '../hooks/useUser'
+import {headTable,bodyTable} from '../../taildwind/styles'
+import useUser from '../../hooks/useUser'
 const Historial = () => {
     const {jwt} = useUser()
 
