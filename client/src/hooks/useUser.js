@@ -2,12 +2,9 @@ import {useCallback, useContext} from 'react'
 import Context from '../context/Usercontext'
 import loginService from '../services/login'
 import registerService from '../services/register'
-
+import addService from '../services/addOperation'
 export default function useUser () {
   const { jwt, setJWT} = useContext(Context)
-
- 
-  console.log(jwt)
  
   const login = useCallback(({email, password}) => {
    console.log({email, password})
@@ -25,25 +22,28 @@ export default function useUser () {
         console.error(err)
       })
   }, [setJWT])
-
-  const formRegister=useCallback(({email,password,name})=>{
+  const formRegister=({email,password,name})=>{
     console.log({email, password,name})
     registerService({email,password,name})
     
-  })
-
-  const logout = useCallback(() => {
-   
+  }
+  const logout = useCallback(() => {   
     window.sessionStorage.removeItem('jwt')
     setJWT(null);
    
   }, [setJWT])
-
+//abm operation
+  const addOperation = (data) => {    
+    console.log(data)
+    return addService(data)
+  }
+  //axios operaciones
   return {
    isLogged: Boolean(jwt),
     jwt ,  
     login,
     logout,
     formRegister,
+    addOperation,
     }
 } 

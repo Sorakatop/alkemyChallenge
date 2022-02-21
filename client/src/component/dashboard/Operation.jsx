@@ -1,11 +1,36 @@
-import React from 'react'
+import React,{ useState} from 'react'
 import check from '../../icons/clipboard-check.svg'
-
+import useUser from '../../hooks/useUser'
 const Operation = () => {
+  //estados
+   const [amount,setAmount] = useState('')
+  const [category_id,setCategory] = useState('')
+  const [operation_type,setOperation_type] = useState('')
+  const [concept,setConcept] = useState('')
+  //customHook
+  const {addOperation,jwt} = useUser()
+  //handlers
+  const handleOperation = (e) =>{
+    const optionOperation = e.target.value;
+    setOperation_type(optionOperation)
+}
+const handleCategory = (e) =>{
+  const optionCategory = e.target.value;
+  setCategory(optionCategory)
+}
+   //handlers
+   const handleSubmit = (e) => {
+     const user_id = jwt.user.id
+    e.preventDefault();
+    const data = { amount,category_id,operation_type,concept,user_id }
+    addOperation(data)    
+   }
+
+  
   return (
     <div>
-        Operaciones
-        <form>
+        Operaciones 
+        <form onSubmit={handleSubmit}>
         <table>
             <tbody>          
               <tr>
@@ -17,22 +42,36 @@ const Operation = () => {
               </tr>
             <tr>
                 <td>
-                    <input type="text" placeholder="$"/>
+                    <input
+                    type="text"
+                    placeholder="$"
+                    onChange={(e) => setAmount(e.target.value)}
+                    value={amount}
+                    />
                 </td>
                 <td>
-                    <select>
-                        <option>Ingreso</option>
-                        <option>Egreso</option>
+                    <select name="category_id"  onClick={handleCategory}>
+                       <option value="1">Comida</option>
+                       <option value="2">Vestimenta</option>
+                     </select>
+                </td>
+                <td>
+                    <select name="operation_type" onClick={handleOperation}>
+                        <option value="egreso">Egreso</option>
+                        <option value="ingreso">Ingreso</option>
                     </select>
                 </td>
                 <td>
-                    <input type="text" placeholder="Tipo de gasto"/>
+                    <input 
+                    name="concept"
+                    type="text"
+                    placeholder="En concepto de"
+                    onChange={(e) => setConcept(e.target.value)}
+                    value={concept}
+                    />
                 </td>
                 <td>
-                    <input type="text" placeholder="En concepto de"/>
-                </td>
-                <td>
-                    <button type="submit"><img src={check}/></button>
+                    <button type="submit"><img alt="icono check" src={check}/></button>
                 </td>
             </tr>
             </tbody>

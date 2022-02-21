@@ -12,7 +12,7 @@ router.get('/', (req, res) => res.json({ hello: "World" }));
 //crud operaciones
 router.get('/api/test', list)
 router.get('/api/:id',userOperation)
-router.post('/api/create', addOperation)
+router.post('/api/create/', addOperation)
 router.put('/api/edit/:id', editOperation)
 router.delete('/api/delete/:id', deleteOperation)
 

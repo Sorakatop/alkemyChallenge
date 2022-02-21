@@ -1,19 +1,17 @@
 import React from 'react'
 import {headTable,bodyTable} from '../../taildwind/styles'
 import useUser from '../../hooks/useUser'
+
+
 const Historial = () => {
-    const {jwt} = useUser()
-
-
-
-    return (
-        
-        <div className='width-2/4 p-6 '>
-            {console.log(jwt.user.Operation[0])}
+const {jwt} = useUser()
+const data = jwt.user.Operation
+    return (        
+        <div className='width-2/4 p-6 '>           
              <h1 className='text-4xl font-bold mb-10'>
                 Historial
             </h1>
-            {jwt
+            {!jwt
             ? <h1>No tienes operaciones</h1>
             :
             <table className='mt-10 shadow-sm'>
@@ -37,27 +35,33 @@ const Historial = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-white">
-                        <tr className="whitespace-nowrap">
-                            <td className={bodyTable}>
-                                {jwt.user.Operation[0].amount}
-                            </td>
-                            <td className="px-6 py-4">
+                        {                               
+                     data.map((item,id)=>{                         
+                       return (
+                           <tr key={id} className="whitespace-nowrap">
+                               <td className={bodyTable}>
+                                   {item.amount}
+                                </td>
+                                <td className="px-6 py-4">
                                 <div className="text-sm text-gray-900">
-                                {jwt.user.Operation[0].category_id}
+                                {item.category_id}
                                 </div>
                             </td>
                             <td className="px-6 py-4">
                                 <div className="text-sm text-gray-500">
-                                {jwt.user.Operation[0].concept}
+                                {item.concept}
                                  </div>
                             </td>
                             <td className={bodyTable}>
-                            {jwt.user.Operation[0].operation_type}
+                            {item.operation_type}
                             </td>
                             <td className={bodyTable}>
-                            {jwt.user.Operation[0].updatedAt?jwt.user.Operation[0].updatedAt:jwt.user.Operation[0].createdAt}
+                            {item.updatedAt?item.updatedAt:item.createdAt}
                             </td>
-                        </tr>
+                           </tr>
+                       )     
+                    })
+                     }
                     </tbody>
              </table>   
         }
