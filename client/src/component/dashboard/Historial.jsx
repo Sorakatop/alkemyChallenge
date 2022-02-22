@@ -1,13 +1,26 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import {headTable,bodyTable} from '../../taildwind/styles'
 import useUser from '../../hooks/useUser'
 
 
 const Historial = () => {
 const {jwt} = useUser()
-const data = jwt.user.Operation
-    return (        
-        <div className='width-2/4 p-6 '>           
+const [info,setInfo]= useState([])
+const id = jwt.user.id
+useEffect (async()=>{
+    const ENDPOINT = 'http://localhost:3001/api'
+    try{
+        fetch(`${ENDPOINT}/${id}`)
+        .then(res=>res.json())
+        .then(data=>setInfo(data))
+    } catch (err) {console.log(err);}  
+},[]) 
+
+
+    return (              
+        <div className='width-2/4 p-6 '>    
+        {console.log(info)} 
+                
              <h1 className='text-4xl font-bold mb-10'>
                 Historial
             </h1>
@@ -36,7 +49,8 @@ const data = jwt.user.Operation
                     </thead>
                     <tbody className="bg-white">
                         {                               
-                     data.map((item,id)=>{                         
+                     info.map((item,id)=>{   
+                                              
                        return (
                            <tr key={id} className="whitespace-nowrap">
                                <td className={bodyTable}>

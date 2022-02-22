@@ -12,13 +12,13 @@ const { Operation } = require('../database/models/')
         ]
       })
       res.json(list)
-    },
+    },    
     userOperation: async (req, res) => {
       const id = req.params.id
       
-      const data = await Operation.findOne({
+      const data = await Operation.findAll({
         where: {
-          id
+          user_id:id
         },
         include: [{
             association: 'categories'
@@ -28,8 +28,8 @@ const { Operation } = require('../database/models/')
           }
         ]
       })
-      console.log(data)
       res.json(data)
+      console.log('aca esta la respuesta '+ data)
     },
     addOperation: async (req, res) => {
       try {
